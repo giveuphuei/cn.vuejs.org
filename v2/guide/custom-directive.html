@@ -729,7 +729,7 @@
         
         
         <li>
-            <a href="/v2/guide/join.html" class="sidebar-link">加入Vue.js社区</a>
+            <a href="/v2/guide/join.html" class="sidebar-link">加入 Vue.js 社区</a>
         </li>
     
         
@@ -766,7 +766,7 @@
       <h1>自定义指令</h1>
     
     
-    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>除了默认设置的核心指令( <code>v-model</code> 和 <code>v-show</code> ),Vue 也允许注册自定义指令。注意，在 Vue2.0 里面，代码复用的主要形式和抽象是组件——然而，有的情况下,你仍然需要对纯 DOM 元素进行底层操作,这时候就会用到自定义指令。下面这个例子将聚焦一个 input 元素，像这样：</p>
+    <h2 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h2><p>除了默认设置的核心指令 (<code>v-model</code> 和 <code>v-show</code>)，Vue 也允许注册自定义指令。注意，在 Vue2.0 里面，代码复用的主要形式和抽象是组件——然而，有的情况下，你仍然需要对纯 DOM 元素进行底层操作，这时候就会用到自定义指令。下面这个例子将聚焦一个 input 元素，像这样：</p>
 
 <div id="simplest-directive-example" class="demo">
   <input v-focus="">
@@ -788,34 +788,34 @@ new Vue({
 <figure class="highlight js"><table><tr><td class="code"><pre><div class="line">directives: &#123;</div><div class="line">  <span class="attr">focus</span>: &#123;</div><div class="line">    <span class="comment">// 指令的定义---</span></div><div class="line"></div><div class="line">  &#125;</div><div class="line">&#125;</div></pre></td></tr></table></figure>
 <p>然后你可以在模板中任何元素上使用新的 <code>v-focus</code> 属性：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">input</span> <span class="attr">v-focus</span>&gt;</span></div></pre></td></tr></table></figure>
-<h2 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h2><p>指令定义函数提供了几个钩子函数（可选）：</p>
+<h2 id="钩子函数"><a href="#钩子函数" class="headerlink" title="钩子函数"></a>钩子函数</h2><p>指令定义函数提供了几个钩子函数 (可选)：</p>
 <ul>
-<li><p><code>bind</code>: 只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个在绑定时执行一次的初始化动作。</p>
+<li><p><code>bind</code>：只调用一次，指令第一次绑定到元素时调用，用这个钩子函数可以定义一个在绑定时执行一次的初始化动作。</p>
 </li>
-<li><p><code>inserted</code>: 被绑定元素插入父节点时调用（父节点存在即可调用，不必存在于 document 中）。</p>
+<li><p><code>inserted</code>：被绑定元素插入父节点时调用 (父节点存在即可调用，不必存在于 document 中)。</p>
 </li>
-<li><p><code>update</code>: 所在组件的 VNode 更新时调用，<strong>但是可能发生在其孩子的 VNode 更新之前</strong>。指令的值可能发生了改变也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新 (详细的钩子函数参数见下)。</p>
+<li><p><code>update</code>：所在组件的 VNode 更新时调用，<strong>但是可能发生在其孩子的 VNode 更新之前</strong>。指令的值可能发生了改变也可能没有。但是你可以通过比较更新前后的值来忽略不必要的模板更新 (详细的钩子函数参数见下)。</p>
 </li>
-<li><p><code>componentUpdated</code>: 所在组件的 VNode <strong>及其孩子的 VNode</strong> 全部更新时调用。</p>
+<li><p><code>componentUpdated</code>：所在组件的 VNode <strong>及其孩子的 VNode</strong> 全部更新时调用。</p>
 </li>
-<li><p><code>unbind</code>: 只调用一次， 指令与元素解绑时调用。</p>
+<li><p><code>unbind</code>：只调用一次，指令与元素解绑时调用。</p>
 </li>
 </ul>
-<p>接下来我们来看一下钩子函数的参数 (包括 <code>el</code>，<code>binding</code>，<code>vnode</code>，<code>oldVnode</code>) 。</p>
+<p>接下来我们来看一下钩子函数的参数 (包括 <code>el</code>，<code>binding</code>，<code>vnode</code>，<code>oldVnode</code>)。</p>
 <h2 id="钩子函数参数"><a href="#钩子函数参数" class="headerlink" title="钩子函数参数"></a>钩子函数参数</h2><p>钩子函数被赋予了以下参数：</p>
 <ul>
-<li><strong>el</strong>: 指令所绑定的元素，可以用来直接操作 DOM 。</li>
-<li><strong>binding</strong>: 一个对象，包含以下属性：<ul>
-<li><strong>name</strong>: 指令名，不包括 <code>v-</code> 前缀。</li>
-<li><strong>value</strong>: 指令的绑定值， 例如： <code>v-my-directive=&quot;1 + 1&quot;</code>, value 的值是 <code>2</code>。</li>
-<li><strong>oldValue</strong>: 指令绑定的前一个值，仅在 <code>update</code> 和 <code>componentUpdated</code> 钩子中可用。无论值是否改变都可用。</li>
-<li><strong>expression</strong>: 绑定值的字符串形式。 例如 <code>v-my-directive=&quot;1 + 1&quot;</code> ， expression 的值是 <code>&quot;1 + 1&quot;</code>。</li>
-<li><strong>arg</strong>: 传给指令的参数。例如 <code>v-my-directive:foo</code>， arg 的值是 <code>&quot;foo&quot;</code>。</li>
-<li><strong>modifiers</strong>: 一个包含修饰符的对象。 例如： <code>v-my-directive.foo.bar</code>, 修饰符对象 modifiers 的值是 <code>{ foo: true, bar: true }</code>。</li>
+<li><strong>el</strong>：指令所绑定的元素，可以用来直接操作 DOM 。</li>
+<li><strong>binding</strong>：一个对象，包含以下属性：<ul>
+<li><strong>name</strong>：指令名，不包括 <code>v-</code> 前缀。</li>
+<li><strong>value</strong>：指令的绑定值，例如：<code>v-my-directive=&quot;1 + 1&quot;</code>, value 的值是 <code>2</code>。</li>
+<li><strong>oldValue</strong>：指令绑定的前一个值，仅在 <code>update</code> 和 <code>componentUpdated</code> 钩子中可用。无论值是否改变都可用。</li>
+<li><strong>expression</strong>：绑定值的字符串形式。例如 <code>v-my-directive=&quot;1 + 1&quot;</code> ，expression 的值是 <code>&quot;1 + 1&quot;</code>。</li>
+<li><strong>arg</strong>：传给指令的参数。例如 <code>v-my-directive:foo</code>，arg 的值是 <code>&quot;foo&quot;</code>。</li>
+<li><strong>modifiers</strong>：一个包含修饰符的对象。例如：<code>v-my-directive.foo.bar</code>, 修饰符对象 modifiers 的值是 <code>{ foo: true, bar: true }</code>。</li>
 </ul>
 </li>
-<li><strong>vnode</strong>: Vue 编译生成的虚拟节点，查阅 <a href="../api/#VNode接口">VNode API</a> 了解更多详情。</li>
-<li><strong>oldVnode</strong>: 上一个虚拟节点，仅在 <code>update</code> 和 <code>componentUpdated</code> 钩子中可用。</li>
+<li><strong>vnode</strong>：Vue 编译生成的虚拟节点，查阅 <a href="../api/#VNode-接口">VNode API</a> 了解更多详情。</li>
+<li><strong>oldVnode</strong>：上一个虚拟节点，仅在 <code>update</code> 和 <code>componentUpdated</code> 钩子中可用。</li>
 </ul>
 <p class="tip">除了 <code>el</code> 之外，其它参数都应该是只读的，尽量不要修改他们。如果需要在钩子之间共享数据，建议通过元素的 <a href="https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/dataset" target="_blank" rel="external">dataset</a> 来进行。</p>
 
