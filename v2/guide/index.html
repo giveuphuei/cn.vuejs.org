@@ -107,6 +107,7 @@
     <li><ul>
       <li><a href="https://router.vuejs.org/" class="nav-link" target="_blank">Vue Router</a></li>
       <li><a href="https://vuex.vuejs.org/" class="nav-link" target="_blank">Vuex</a></li>
+      <li><a href="https://ssr.vuejs.org/" class="nav-link" target="_blank">Vue 服务端渲染</a></li>
     </ul></li>
     <li><h4>资源列表</h4></li>
     <li><ul>
@@ -171,6 +172,7 @@
     <li><ul>
       <li><a href="https://router.vuejs.org/" class="nav-link" target="_blank">Vue Router</a></li>
       <li><a href="https://vuex.vuejs.org/" class="nav-link" target="_blank">Vuex</a></li>
+      <li><a href="https://ssr.vuejs.org/" class="nav-link" target="_blank">Vue 服务端渲染</a></li>
     </ul></li>
     <li><h4>资源列表</h4></li>
     <li><ul>
@@ -202,9 +204,32 @@
         <div class="list">
             <div class="main-sponsor">
                 <span>赞助者</span><br>
-                <a href="https://xiaozhuanlan.com/" target="_blank" style="display: block; margin: 6px 0">
-                    <img src="/images/xiaozhuanlan-sidebar.png" style="border-radius: 3px">
+                <a id="main-sponsor-link" target="_blank" style="display: block; margin: 6px 0">
+                    <img id="main-sponsor-image" style="border-radius: 3px">
                 </a>
+                <script>
+                (function () {
+                    var API = 'https://xiaozhuanlan.com/example/baner_settings'
+                    var req = new XMLHttpRequest()
+                    var data = {
+                        "link_url": "https://xiaozhuanlan.com",
+                        "img_url": "https://diycode.b0.upaiyun.com/photo/2017/15ebaae7745e70876cf20c0ee93bdc9e.png"
+                    }
+                    req.onreadystatechange = function () {
+                      if (req.readyState == 4) {
+                        if (req.status >= 200 && req.status < 300) {
+                            try {
+                                data = JSON.parse(req.responseText)
+                            } catch (e) {}
+                        }
+                        document.getElementById('main-sponsor-link').href = data.link_url
+                        document.getElementById('main-sponsor-image').src = data.img_url
+                      }
+                    }
+                    req.open('GET', API)
+                    req.send()
+                })()
+                </script>
             </div>
             <a class="become-backer" href="/support-vuejs">
                 Become a Sponsor
@@ -766,7 +791,7 @@
       <h1>介绍</h1>
     
     
-    <h2 id="Vue-js-是什么"><a href="#Vue-js-是什么" class="headerlink" title="Vue.js 是什么"></a>Vue.js 是什么</h2><p>Vue.js (读音 /vjuː/，类似于 <strong>view</strong>)  是一套构建用户界面的<strong>渐进式框架</strong>。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与<a href="single-file-components.html">单文件组件</a>和 <a href="//github.com/vuejs/awesome-vue#libraries--plugins">Vue 生态系统支持的库</a>结合使用时，Vue 也完全能够为复杂的单页应用程序提供驱动。</p>
+    <h2 id="Vue-js-是什么"><a href="#Vue-js-是什么" class="headerlink" title="Vue.js 是什么"></a>Vue.js 是什么</h2><p>Vue.js (读音 /vjuː/，类似于 <strong>view</strong>)  是一套构建用户界面的<strong>渐进式框架</strong>。与其他重量级框架不同的是，Vue 采用自底向上增量开发的设计。Vue 的核心库只关注视图层，它不仅易于上手，还便于与第三方库或既有项目整合。另一方面，当与<a href="single-file-components.html">单文件组件</a>和 <a href="https://github.com/vuejs/awesome-vue#libraries--plugins" target="_blank" rel="external">Vue 生态系统支持的库</a>结合使用时，Vue 也完全能够为复杂的单页应用程序提供驱动。</p>
 <p>如果你是有经验的前端开发者，想知道 Vue.js 与其它库/框架的区别，查看<a href="comparison.html">对比其它框架</a>。</p>
 <h2 id="起步"><a href="#起步" class="headerlink" title="起步"></a>起步</h2><p class="tip">官方指南假设你已有 HTML、CSS 和 JavaScript 中级前端知识。如果你刚开始学习前端开发，将框架作为你的第一步可能不是最好的主意——掌握好基础知识再来！之前有其他框架的使用经验对于学习 Vue.js 是有帮助的，但这不是必需的。</p>
 
@@ -930,7 +955,7 @@ var app7 = new Vue({
 <p>这只是一个假设的例子，但是我们已经设法将应用分割成了两个更小的单元，子单元通过 <code>props</code> 接口实现了与父单元很好的解耦。我们现在可以进一步为我们的 <code>todo-item</code> 组件实现更复杂的模板和逻辑的改进，而不会影响到父单元。</p>
 <p>在一个大型应用中，有必要将整个应用程序划分为组件，以使开发可管理。在<a href="components.html">后续教程</a>中我们将详述组件，不过这里有一个 (假想的) 使用了组件的应用模板是什么样的例子：</p>
 <figure class="highlight html"><table><tr><td class="code"><pre><div class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">"app"</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">app-nav</span>&gt;</span><span class="tag">&lt;/<span class="name">app-nav</span>&gt;</span></div><div class="line">  <span class="tag">&lt;<span class="name">app-view</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">app-sidebar</span>&gt;</span><span class="tag">&lt;/<span class="name">app-sidebar</span>&gt;</span></div><div class="line">    <span class="tag">&lt;<span class="name">app-content</span>&gt;</span><span class="tag">&lt;/<span class="name">app-content</span>&gt;</span></div><div class="line">  <span class="tag">&lt;/<span class="name">app-view</span>&gt;</span></div><div class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></div></pre></td></tr></table></figure>
-<h3 id="与自定义元素的关系"><a href="#与自定义元素的关系" class="headerlink" title="与自定义元素的关系"></a>与自定义元素的关系</h3><p>你可能已经注意到 Vue 组件非常类似于<strong>自定义元素</strong>——它是 <a href="//www.w3.org/wiki/WebComponents/">Web 组件规范</a>的一部分，这是因为 Vue 的组件语法部分参考了该规范。例如 Vue 组件实现了 <a href="//github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md">Slot API</a> 与 <code>is</code> 特性。但是，还是有几个关键差别：</p>
+<h3 id="与自定义元素的关系"><a href="#与自定义元素的关系" class="headerlink" title="与自定义元素的关系"></a>与自定义元素的关系</h3><p>你可能已经注意到 Vue 组件非常类似于<strong>自定义元素</strong>——它是 <a href="https://www.w3.org/wiki/WebComponents/" target="_blank" rel="external">Web 组件规范</a>的一部分，这是因为 Vue 的组件语法部分参考了该规范。例如 Vue 组件实现了 <a href="https://github.com/w3c/webcomponents/blob/gh-pages/proposals/Slots-Proposal.md" target="_blank" rel="external">Slot API</a> 与 <code>is</code> 特性。但是，还是有几个关键差别：</p>
 <ol>
 <li><p>Web 组件规范仍然处于草案阶段，并且尚无浏览器原生实现。相比之下，Vue 组件不需要任何补丁，并且在所有支持的浏览器 (IE9 及更高版本) 之下表现一致。必要时，Vue 组件也可以包装于原生自定义元素之内。</p>
 </li>
@@ -950,6 +975,20 @@ var app7 = new Vue({
       </div>
     
     <div class="footer">
+      <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<div class="bsa-cpc"></div>
+<script>
+  (function(){
+    if(typeof _bsa !== 'undefined' && _bsa) {
+    _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+      target: '.bsa-cpc',
+      align: 'horizontal',
+      disable_css: 'true'
+    });
+      }
+  })();
+</script>
+
       发现错误？想参与编辑？
       <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/v2/guide/index.md" target="_blank">
         在 Github 上编辑此页！

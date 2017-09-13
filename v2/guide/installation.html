@@ -107,6 +107,7 @@
     <li><ul>
       <li><a href="https://router.vuejs.org/" class="nav-link" target="_blank">Vue Router</a></li>
       <li><a href="https://vuex.vuejs.org/" class="nav-link" target="_blank">Vuex</a></li>
+      <li><a href="https://ssr.vuejs.org/" class="nav-link" target="_blank">Vue 服务端渲染</a></li>
     </ul></li>
     <li><h4>资源列表</h4></li>
     <li><ul>
@@ -171,6 +172,7 @@
     <li><ul>
       <li><a href="https://router.vuejs.org/" class="nav-link" target="_blank">Vue Router</a></li>
       <li><a href="https://vuex.vuejs.org/" class="nav-link" target="_blank">Vuex</a></li>
+      <li><a href="https://ssr.vuejs.org/" class="nav-link" target="_blank">Vue 服务端渲染</a></li>
     </ul></li>
     <li><h4>资源列表</h4></li>
     <li><ul>
@@ -202,9 +204,32 @@
         <div class="list">
             <div class="main-sponsor">
                 <span>赞助者</span><br>
-                <a href="https://xiaozhuanlan.com/" target="_blank" style="display: block; margin: 6px 0">
-                    <img src="/images/xiaozhuanlan-sidebar.png" style="border-radius: 3px">
+                <a id="main-sponsor-link" target="_blank" style="display: block; margin: 6px 0">
+                    <img id="main-sponsor-image" style="border-radius: 3px">
                 </a>
+                <script>
+                (function () {
+                    var API = 'https://xiaozhuanlan.com/example/baner_settings'
+                    var req = new XMLHttpRequest()
+                    var data = {
+                        "link_url": "https://xiaozhuanlan.com",
+                        "img_url": "https://diycode.b0.upaiyun.com/photo/2017/15ebaae7745e70876cf20c0ee93bdc9e.png"
+                    }
+                    req.onreadystatechange = function () {
+                      if (req.readyState == 4) {
+                        if (req.status >= 200 && req.status < 300) {
+                            try {
+                                data = JSON.parse(req.responseText)
+                            } catch (e) {}
+                        }
+                        document.getElementById('main-sponsor-link').href = data.link_url
+                        document.getElementById('main-sponsor-image').src = data.img_url
+                      }
+                    }
+                    req.open('GET', API)
+                    req.send()
+                })()
+                </script>
             </div>
             <a class="become-backer" href="/support-vuejs">
                 Become a Sponsor
@@ -832,7 +857,7 @@
 </li>
 <li><p><strong><a href="http://wiki.commonjs.org/wiki/Modules/1.1" target="_blank" rel="external">CommonJS</a></strong>：CommonJS 构建用来配合老的打包工具比如 <a href="http://browserify.org/" target="_blank" rel="external">browserify</a> 或 <a href="https://webpack.github.io" target="_blank" rel="external">webpack 1</a>。这些打包工具的默认文件 (<code>pkg.main</code>) 是只包含运行时的 CommonJS 构建 (<code>vue.runtime.common.js</code>)。</p>
 </li>
-<li><p><strong><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="external">ES Module</a></strong>：ES module 构建用来配合现代打包工具比如 <a href="https://webpack.js.org" target="_blank" rel="external">webpack 2</a> 或 <a href="http://rollupjs.org/" target="_blank" rel="external">rollup</a>。这些打包工具的默认文件 (<code>pkg.module</code>) 是只包含运行时的 ES Module 构建 (<code>vue.runtime.esm.js</code>)。</p>
+<li><p><strong><a href="http://exploringjs.com/es6/ch_modules.html" target="_blank" rel="external">ES Module</a></strong>：ES module 构建用来配合现代打包工具比如 <a href="https://webpack.js.org" target="_blank" rel="external">webpack 2</a> 或 <a href="https://rollupjs.org/" target="_blank" rel="external">rollup</a>。这些打包工具的默认文件 (<code>pkg.module</code>) 是只包含运行时的 ES Module 构建 (<code>vue.runtime.esm.js</code>)。</p>
 </li>
 </ul>
 <h3 id="运行时-编译器-vs-只包含运行时"><a href="#运行时-编译器-vs-只包含运行时" class="headerlink" title="运行时 + 编译器 vs. 只包含运行时"></a>运行时 + 编译器 vs. 只包含运行时</h3><p>如果你需要在客户端编译模板 (比如传入一个字符串给 <code>template</code> 选项，或挂载到一个元素上并以其内部的 HTML 作为模板)，你将需要加上编译器，即完整版的构建：</p>
@@ -870,6 +895,20 @@
       </div>
     
     <div class="footer">
+      <script src="//m.servedby-buysellads.com/monetization.js" type="text/javascript"></script>
+<div class="bsa-cpc"></div>
+<script>
+  (function(){
+    if(typeof _bsa !== 'undefined' && _bsa) {
+    _bsa.init('default', 'CKYD62QM', 'placement:vuejsorg', {
+      target: '.bsa-cpc',
+      align: 'horizontal',
+      disable_css: 'true'
+    });
+      }
+  })();
+</script>
+
       发现错误？想参与编辑？
       <a href="https://github.com/vuejs/cn.vuejs.org/blob/master/src/v2/guide/installation.md" target="_blank">
         在 Github 上编辑此页！
